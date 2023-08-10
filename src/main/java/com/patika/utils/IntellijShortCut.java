@@ -5,5 +5,5 @@ public class IntellijShortCut {
     //Alt+Ins ==> constructor, toString, getter setter
     // Ctrl+/ => single comment
     //Ctrl+shift+/ ==> multiple comment
-
+//ctrl+altL=formater
 }
