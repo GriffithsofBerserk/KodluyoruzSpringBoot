@@ -1,10 +1,12 @@
 package com.patika.controller;
 
 import com.patika.dto.ProductDto;
+import jakarta.persistence.Column;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -80,8 +82,9 @@ public class ThymeleafController {
         return "thymeleaf6";
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Model Object göndermek
-    //url http://localhost:8080/thymeleaf7/4 // yazdıgımız son uzantıyı yazıyor mesela bunda id4 çıktısı veriyor.
+    // Path Variable
+    //url http://localhost:8080/thymeleaf7/4 yazdıgımız son uzantıyı yazıyor mesela bunda id4 çıktısı veriyor.
+    //url2  http://localhost:8080/thymeleaf7/
     //...uzantıyı değiştirip 63 yazsak bu sefer de id63 verecektir.
     //@GetMapping("/thymeleaf7/{id}") //oluşacak sayfanın urlsinin devamını belirtmesi için kullanıyoruz.
     @GetMapping({"/thymeleaf7/","/thymeleaf7/{id}"})// Aşağıdaki kodlarla beraber böylece bir şey yazılmadığında da
@@ -95,5 +98,22 @@ public class ThymeleafController {
         }
         return "thymeleaf7";
     }
+    //@RequestParam
+    //url2  http://localhost:8080/thymeleaf8?id=4
+    //url2  http://localhost:8080/thymeleaf8?id=4&name==SuatCanOlcer
+    @GetMapping("/thymeleaf8")
+    public String getThymeleaf8ModelObject(Model model,
+                                           @RequestParam(name = "id",required = false,defaultValue = "0") Long id,
+                                           @RequestParam(name = "name")String adi){
+        if (id!=null) {
+            model.addAttribute("key_model1", "id" + id+" adı soyadı: "+adi);
+        }else if (id==0){
+            model.addAttribute("key_model1","default değer geldi");
+        }else{
+            model.addAttribute("key_model1","id bulunamadı");
+        }
+        return "thymeleaf8";
+    }
+
 
 }
